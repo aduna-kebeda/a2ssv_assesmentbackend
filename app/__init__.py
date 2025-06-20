@@ -70,7 +70,9 @@ def create_app():
                 "url": "https://yourcompany.com",
             },
         },
-        "schemes": ["http", "https"],
+        "schemes": ["https"],  # Only allow https
+        "host": "a2ssv-assesmentbackend.onrender.com",  # Set the correct host
+        "basePath": "/",  # Set the base path if needed
         "securityDefinitions": {
             "Bearer": {
                 "type": "apiKey",
@@ -89,4 +91,4 @@ def create_app():
     app.register_blueprint(jobs.bp)
     app.register_blueprint(applications.bp)
 
-    return app 
+    return app
