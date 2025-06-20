@@ -1,0 +1,12 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+psycopg2-binary
+Flask-JWT-Extended
+marshmallow
+marshmallow-sqlalchemy
+python-dotenv
+cloudinary
+pytest
+pytest-mock
+flasgger 
