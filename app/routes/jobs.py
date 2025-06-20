@@ -25,7 +25,7 @@ def create_job():
         title=data['title'],
         description=data['description'],
         location=data.get('location'),
-        created_by=identity['id']
+        created_by=identity  # identity is now a string user id
     )
     db.session.add(job)
     db.session.commit()

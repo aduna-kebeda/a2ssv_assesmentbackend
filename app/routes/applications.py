@@ -45,7 +45,7 @@ def apply_job():
     if not job:
         return base_response(False, 'Job not found', None, ['Job not found']), 404
     # Check for duplicate application
-    existing = Application.query.filter_by(applicant_id=applicant['id'], job_id=job_id).first()
+    existing = Application.query.filter_by(applicant_id=applicant, job_id=job_id).first()
     if existing:
         return base_response(False, 'Duplicate application', None, ['You have already applied to this job.']), 409
     # Upload resume to Cloudinary
@@ -55,7 +55,7 @@ def apply_job():
     else:
         return base_response(False, 'Resume must be a PDF file.', None, ['Resume must be a PDF file.']), 400
     application = Application(
-        applicant_id=applicant['id'],
+        applicant_id=applicant,
         job_id=job_id,
         resume_link=resume_link,
         cover_letter=cover_letter,
@@ -74,7 +74,7 @@ def my_applications():
     identity = get_jwt_identity()
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
-    query = Application.query.filter_by(applicant_id=identity['id'])
+    query = Application.query.filter_by(applicant_id=identity)
     total = query.count()
     applications = query.order_by(Application.applied_at.desc()).offset((page-1)*page_size).limit(page_size).all()
     result = []
