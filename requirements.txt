@@ -9,4 +9,7 @@ python-dotenv
 cloudinary
 pytest
 pytest-mock
-flasgger 
+flasgger
+Werkzeug
+requests
+gunicorn

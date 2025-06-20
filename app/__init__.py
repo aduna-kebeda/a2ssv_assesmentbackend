@@ -56,7 +56,33 @@ def create_app():
         },
         "security": [{"Bearer": []}],
     }
-    Swagger(app, config=swagger_config)
+
+    swagger_template = {
+        "swagger": "2.0",
+        "info": {
+            "title": "Job Listing API",
+            "description": "API documentation for the Job Listing platform",
+            "version": "1.0.0",
+            "contact": {
+                "responsibleOrganization": "Your Company",
+                "responsibleDeveloper": "Your Name",
+                "email": "your@email.com",
+                "url": "https://yourcompany.com",
+            },
+        },
+        "schemes": ["http", "https"],
+        "securityDefinitions": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "JWT Authorization header using the Bearer scheme. Example: 'Authorization: Bearer {token}'"
+            }
+        },
+        "security": [{"Bearer": []}],
+    }
+
+    Swagger(app, config=swagger_config, template=swagger_template)
 
     from .routes import auth, jobs, applications
     app.register_blueprint(auth.bp)

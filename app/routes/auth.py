@@ -117,5 +117,5 @@ def login():
         return base_response(False, 'User not found', None, ['User not found']), 404
     if not check_password_hash(user.password, password):
         return base_response(False, 'Incorrect password', None, ['Incorrect password']), 401
-    token = create_access_token(identity={'id': str(user.id), 'role': user.role})
+    token = create_access_token(identity=str(user.id), additional_claims={"role": user.role})
     return base_response(True, 'Login successful', {'token': token, 'user': {'id': str(user.id), 'role': user.role}}) 
